@@ -1,28 +1,28 @@
-// Create a div element with class attribute
+// Create a div element with class conatiner
 let div = document.createElement("div");
 div.setAttribute("class", "container");
 
-// Create a h2 element with text content
+// Create a h2 element with text content Superhero Hunter...The Heading
 let h2 = document.createElement("h2");
 h2.style.color = "white";
 h2.textContent = "Superhero Hunter";
 
-// Create an input element with type, id, class and placeholder attributes
+// Create an input element for searchbar with type, id, class and placeholder attributes
 let input = document.createElement("input");
 input.setAttribute("type", "search");
 input.setAttribute("id", "searchbar");
 input.setAttribute("class", "form-control nav-link");
 input.setAttribute("placeholder", "Search");
 
-// Create a br element
+// Create a br element for break
 let br = document.createElement("br");
 
-// Create a ul element with class and role attributes
+// Create a ul element with class and role attributes for tabs
 let nav = document.createElement("ul");
 nav.setAttribute("class", "nav nav-tabs");
 nav.setAttribute("role", "tablist");
 
-// Create three li elements with class attribute
+// Create three li elements with class attribute for navbar toggling
 let li1 = document.createElement("li");
 li1.setAttribute("class", "nav-item");
 
@@ -32,7 +32,7 @@ li2.setAttribute("class", "nav-item");
 let li3 = document.createElement("li");
 li3.setAttribute("class", "nav-item");
 
-// Create three a elements with class, data-toggle, href and text content
+// Creating 3 toggle nav buttons for toggling switch
 let home = document.createElement("a");
 home.setAttribute("class", "nav-link active");
 home.setAttribute("data-toggle", "tab");
@@ -52,7 +52,7 @@ superhero.setAttribute("data-toggle", "tab");
 superhero.setAttribute("href", "#menu2");
 superhero.textContent = "Superhero Page";
 
-// Append the a elements to the li elements
+// Append the a elements to the li which has class nav-item
 li1.appendChild(home);
 li2.appendChild(favourite_superheroes);
 li3.appendChild(superhero);
@@ -62,7 +62,7 @@ nav.appendChild(li1);
 nav.appendChild(li2);
 nav.appendChild(li3);
 
-// Create a div element with class attribute
+// Create a div element with class tab-content
 let tabContent = document.createElement("div");
 tabContent.setAttribute("class", "tab-content");
 
@@ -333,7 +333,8 @@ searchbar.addEventListener("keyup", function Keyup() {
 
 let limit = 10;
 let page = 1; // Change this to the page number you want
-let offset = (page - 1) * limit;
+// let offset = (page - 1) * limit;
+let offset = 10;
 var data_fetch;
 
 
@@ -464,25 +465,13 @@ async function getAllPosts(){
                 let resp_poster = String(resp_thumb.path + "." + resp_thumb.extension);
                 document.getElementById("poster").src = resp_poster;
                 document.getElementById("movietitle").innerHTML = num.name;
-                if(num.description == ''){
-                    num.description = "No Description";
-                };
                 document.getElementById("moviedesc").innerHTML = num.description;
             }
 
         });
 
         }
-        if (fav_list.length == 0 ) {
-            let noFav = document.createElement("h1");
-            noFav.id = "nofav";
-            noFav.classList.add("text-center");
-            noFav.classList.add("mt-5");
-            noFav.innerHTML = "No Favourites are Added!";
-            noFav.style.color = "white";
-            favContainer.appendChild(noFav);
-        }
-        console.log("fav list :",fav_list);
+        // console.log("fav list :",fav_list);
 
 }
 
@@ -490,38 +479,59 @@ getAllPosts();
 
 
 // Select the previous and next buttons by their class names using querySelector
-let prev = document.querySelector(".previous");
-let next = document.querySelector(".next");
-console.log(prev);
-console.log(next);
+const prev = document.querySelector(".previous");
+const next = document.querySelector(".next");
+
+
+if (page == 1) {
+  prev.style.display = 'none';
+}
 // Add a click event listener to the previous button using addEventListener
 prev.addEventListener("click", function() {
   // Decrease the page number by one
-  console.log("prev clicked");
   page--;
-  // Update the offset value based on the page number
   offset = (page - 1) * limit;
+  let parent = document.getElementsByClassName("prashant_class")[0];
+  let children = document.querySelectorAll(".prashant_post");
+  
+  
   // Call the getAllPosts function again with the new offset value
   getAllPosts();
-  // Hide the previous button if the page number is one using style.display
-  if (page == 1) {
-    prev.style.display = "none";
+  
+  // If there are at least 10 children, remove them
+  if (children.length >= 10) {
+    for (var i = 0; i < 10; i++) {
+      parent.removeChild(children[i]);
+    }
   }
   // Show the next button if it was hidden before using style.display
   next.style.display = "block";
 });
+
 // Add a click event listener to the next button using addEventListener
 next.addEventListener("click", function() {
   // Increase the page number by one
   page++;
   // Update the offset value based on the page number
   offset = (page - 1) * limit;
+
+  let parent = document.getElementsByClassName("prashant_class")[0];
+  let children = document.querySelectorAll(".prashant_post");
+  // If there are at least 10 children, remove them
+  if (children.length >= 10) {
+    for (var i = 0; i < 10; i++) {
+      parent.removeChild(children[i]);
+    }
+  }
+
   // Call the getAllPosts function again with the new offset value
   getAllPosts();
   // Hide the next button if there are no more results to fetch using style.display
   if (offset + limit >= data_fetch.data.total) {
     next.style.display = "none";
   }
+  // Remove limit number child elements using querySelectorAll and removeChild
+  
   // Show the previous button if it was hidden before using style.display
   prev.style.display = "block";
 });
