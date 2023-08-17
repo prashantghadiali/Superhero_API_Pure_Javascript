@@ -266,17 +266,6 @@ let page = 1; // Change this to the page number you want
 let offset = 10;
 var data_fetch;
 
-// async function fetchSearch(){
-//     var searchText = searchbar.value;
-//     console.log("fetch func:",searchText);
-//     let resp1 = await fetch(`https://gateway.marvel.com:443/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}&name=${searchText}&limit=${limit}&offset=${offset}`);
-//     console.log(resp1);
-//     let data_fetch1 = await resp1.json();
-//     console.log("data fetch 1:", data_fetch1);
-//     let data1 = data_fetch1.data.results;
-//     console.log("Data:",data1);
-// }
-
 
 
 const movie_page_arr = []
@@ -292,9 +281,6 @@ async function getAllPosts(){
     data_fetch = await resp.json();
     let data = data_fetch.data.results;
 
-    // console.log("Data :", data);
-    
-    // console.log("Data fetch :", data_fetch);
 
     const prashantContainer = document.querySelector(".prashant_class");
     // console.log("prashant container :", prashantContainer);
@@ -307,7 +293,6 @@ async function getAllPosts(){
 
     // all data ele 
     for (let i = 0; i < data.length; i++) {
-        // const element = data[i];
         const resp_thumb = data[i].thumbnail;
         var resp_poster = String(resp_thumb.path + "." + resp_thumb.extension);
         const prashant_post = document.createElement('div');
@@ -317,7 +302,6 @@ async function getAllPosts(){
         const fav_btn = document.createElement('button');
         const delBtn = document.createElement('p');
        
-        // const serchItemval = document.getElementById('searchbar').value;
         const li = document.createElement('li');
         li.innerHTML = serchItemval;
 
