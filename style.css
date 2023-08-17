@@ -42,7 +42,7 @@
 .title{
     position: absolute;
     height: auto;
-    left: 45%;
+    left: 25%;
     right: 25%;
     top: calc(50% - 18px/2 - 46px);
 
@@ -61,7 +61,7 @@
 .body{
     position: absolute;
     height: 15px;
-    left: 45%;
+    left: 25%;
     right: 4.76%;
     top: calc(50% - 15px/2 - 0.8px);
     font-family: 'Poppins';
@@ -111,6 +111,52 @@
 }
 
 @media (max-width: 576px) {
+    .prashant_post {
+        min-height: 40vh;
+    }
+    .title {
+        position: relative;
+        display: block;
+        text-align: left;
+        height: auto;
+        top: 5vh;
+        left: auto;
+        right: auto;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 15px;
+        line-height: 12px;
+        letter-spacing: 0.172px;
+        color: #35415E;
+        background: none;
+    }
+    .fav_btn{
+        position: absolute;
+        top: 0px;
+        padding: 2px;
+        right: 7px;
+        cursor: pointer;
+        background: none;
+    }
+    .body {
+        position: relative;
+        height: 50px;
+        width: auto;
+        left: auto;
+        right: auto;
+        top: 5vh;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0.143333px;
+        background: none;
+    }
+ }
+
+@media (max-width: 768px) {
     .prashant_post {
         min-height: 40vh;
     }
