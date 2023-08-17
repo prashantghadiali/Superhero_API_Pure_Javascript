@@ -19,6 +19,7 @@
 
 .prashant_post{
     position: relative;
+    height: auto;
     width: auto;
     height: 25vh;
     left: 10px;
@@ -108,3 +109,49 @@
     border-radius: 20%;
     margin: 5px;
 }
+
+@media (max-width: 576px) {
+    .prashant_post{
+        height: 50vh;
+    } 
+    .title {
+        position: relative;
+        display: block;
+        text-align: left;
+        height: auto;
+        left: 33%;
+        /* right: 25%; */
+        top: calc(50% - 129px/2 - 39px);
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 15px;
+        line-height: 12px;
+        letter-spacing: 0.172px;
+        color: #35415E;
+        background: none;
+    }
+    .body {
+        position: relative;
+        height: 15px;
+        left: 5%;
+        right: 4.76%;
+        top: calc(50% - 102px/2 - 33.8px);
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 15px;
+        letter-spacing: 0.143333px;
+        background: none;
+        color: #fefefe;
+    }
+    .fav_btn{
+        position: absolute;
+        top: 0px;
+        padding: 2px;
+        right: 7px;
+        cursor: pointer;
+        background: none;
+    }
+ }

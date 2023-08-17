@@ -234,84 +234,13 @@ const publicKey = '5b55622c4d7012b4adbb496fe9944d6b';
 const privateKey = '6d5fc69086520afc9910ef2100615398b126ac36';
 const hashKey = 'ebcc73ed2df2ad849c23ee511243e999';
 let hash = CryptoJS.MD5(ts+privateKey+publicKey)
-// console.log("hash:", hash);
 
-// const root = document.getElementById("root");
-
-// root.innerHTML = `
-// <div class="">
-//         <h2>Movies.Net</h2>
-        
-//         <input type="search" id='searchbar' class="form-control nav-link" placeholder="Search">
-        
-//         <br>
-//         <!-- Nav tabs -->
-//         <ul class="nav nav-tabs" role="tablist">
-//             <li class="nav-item">
-//                 <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
-//             </li>
-//             <li class="nav-item">
-//                 <a class="nav-link" data-toggle="tab" href="#menu1">My favourite superheroes Page</a>
-//             </li>
-//             <li class="nav-item">
-//                 <a class="nav-link" id="movie_link" data-toggle="tab" href="#menu2">Superhero Page</a>
-//             </li>
-//         </ul>
-//         <!-- Tab panes -->
-//         <div class="tab-content">
-//             <div id="home" class=" tab-pane active"><br>
-//                 <div id="prashant" class="prashant_class row"></div>
-//                 <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
-//             </div>
-//             <div id="menu1" class=" favclass tab-pane fade"><br>
-//                 <!-- favourite items -->
-//             </div>
-//             <div id="menu2" class="container moviepage tab-pane fade"><br>
-//                 <div class="card text-center" style="width: 20vw; height: 40vh;">
-//                     <img src="/Baner.png" id="poster" class="card-img-top text-center" alt="Image File">
-//                     <div class="card-body">
-//                         <h5 class="card-title" id="movietitle"></h5>
-//                         <p class="card-text" id="moviedesc"></p>
-//                         <a href="/" class="btn btn-primary">Back To Home</a>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-        
-//         <div class="tab-content" id="nav-tabContent">
-//             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-//                 <div id="prashant" class="prashant_class row">
-//                 </div>
-//             </div>
-//             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-//             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-//                 Made By Prashant Ghadiali
-//             </div>
-//         </div>
-// `
-
-// let searchbar = document.getElementById("searchbar").value;
-// $('#searchbar').keyup(function() {
-//     var serchItem = $('#searchbar').val();
-//     for (var i = 0; i < $('.col-md-auto').length; i++) {
-//             $('.col-md-auto:eq(' + i + ')').css('display', 'block');
-//             if ($('.col-md-auto:eq(' + i + ')').text().indexOf(serchItem) < 0) {
-//             $('.col-md-auto:eq(' + i + ')').css('display', 'none');
-//             } 
-//         }
-//     });
-
-// Get the searchbar element by its id
-// let searchbar = document.getElementById("searchbar");
-// let serchItem = searchbar.value;
-// console.log(serchItem);
 // Add a keyup event listener to the searchbar element
 searchbar.addEventListener("keyup", function Keyup() {
     // Get the value of the searchbar element
     var searchText = searchbar.value;
-    console.log(searchText);
-  
+    // console.log(searchText);
+    // fetchSearch();
     // Get all the elements with class col-md-auto
     let cols = document.getElementsByClassName("col-md-auto");
   
@@ -336,6 +265,18 @@ let page = 1; // Change this to the page number you want
 // let offset = (page - 1) * limit;
 let offset = 10;
 var data_fetch;
+
+// async function fetchSearch(){
+//     var searchText = searchbar.value;
+//     console.log("fetch func:",searchText);
+//     let resp1 = await fetch(`https://gateway.marvel.com:443/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}&name=${searchText}&limit=${limit}&offset=${offset}`);
+//     console.log(resp1);
+//     let data_fetch1 = await resp1.json();
+//     console.log("data fetch 1:", data_fetch1);
+//     let data1 = data_fetch1.data.results;
+//     console.log("Data:",data1);
+// }
+
 
 
 const movie_page_arr = []
@@ -366,7 +307,7 @@ async function getAllPosts(){
 
     // all data ele 
     for (let i = 0; i < data.length; i++) {
-        const element = data[i];
+        // const element = data[i];
         const resp_thumb = data[i].thumbnail;
         var resp_poster = String(resp_thumb.path + "." + resp_thumb.extension);
         // console.log("element :",resp_poster);
@@ -506,6 +447,9 @@ prev.addEventListener("click", function() {
   }
   // Show the next button if it was hidden before using style.display
   next.style.display = "block";
+  if (page == 1) {
+    prev.style.display = "none";
+  }
 });
 
 // Add a click event listener to the next button using addEventListener
