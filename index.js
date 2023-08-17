@@ -125,7 +125,7 @@ prashant_class.setAttribute("class", "prashant_class row");
 // Create a div element with class and style attributes
 let card = document.createElement("div");
 card.setAttribute("class", "card text-center");
-card.setAttribute("style", "width: 100%; height: auto;");
+card.setAttribute("style", "margin-top: 2vh; width: 100%; height: auto;");
 
 // Create an img element with src, id, class and alt attributes
 let initial_image = document.createElement("img");
@@ -310,24 +310,16 @@ async function getAllPosts(){
         // const element = data[i];
         const resp_thumb = data[i].thumbnail;
         var resp_poster = String(resp_thumb.path + "." + resp_thumb.extension);
-        // console.log("element :",resp_poster);
         const prashant_post = document.createElement('div');
         const image = document.createElement('img')
         const title = document.createElement('h3');
         const body = document.createElement('p');
         const fav_btn = document.createElement('button');
         const delBtn = document.createElement('p');
-        const favBtn = document.createElement('button')
+       
         // const serchItemval = document.getElementById('searchbar').value;
         const li = document.createElement('li');
         li.innerHTML = serchItemval;
-
-        let list = document.getElementsByClassName("col-md-auto")
-
-			
-        favBtn.addEventListener("click", () => {
-            list.appendChild(li);
-        })
 
         delBtn.addEventListener("click", () => {
             prashantContainer.removeChild(prashant_post);
@@ -366,7 +358,7 @@ async function getAllPosts(){
         prashant_post.appendChild(body);
         prashant_post.appendChild(fav_btn);
         prashant_post.appendChild(delBtn);
-        prashant_post.appendChild(favBtn);
+      
         // prashant_post.appendChild(prasRow)
         prashantContainer.appendChild(prashant_post);
 

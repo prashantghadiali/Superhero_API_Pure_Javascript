@@ -132,18 +132,8 @@
         background: none;
     }
     .body {
-        position: relative;
-        height: 15px;
-        left: 5%;
-        right: 4.76%;
-        top: calc(50% - 102px/2 - 33.8px);
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 15px;
-        line-height: 15px;
-        letter-spacing: 0.143333px;
-        background: none;
+        position: relative !important;
+        display: block !important;
         color: #fefefe;
     }
     .fav_btn{
@@ -152,6 +142,21 @@
         padding: 2px;
         right: 7px;
         cursor: pointer;
+        background: none;
+    }
+    .body {
+        position: relative;
+        height: auto;
+        width: auto;
+        left: 4%;
+        right: 4.76%;
+        top: calc(50% - 15px/2 - 80.8px);
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0.143333px;
         background: none;
     }
  }
