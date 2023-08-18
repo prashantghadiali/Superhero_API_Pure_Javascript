@@ -1,5 +1,6 @@
 // Create a div element with class conatiner
 let div = document.createElement("div");
+var searchText;
 div.setAttribute("class", "container");
 
 // Create a h2 element with text content Superhero Hunter...The Heading
@@ -13,6 +14,13 @@ input.setAttribute("type", "search");
 input.setAttribute("id", "searchbar");
 input.setAttribute("class", "form-control nav-link");
 input.setAttribute("placeholder", "Search");
+
+let msg = document.createElement("div");
+msg.setAttribute("id", "msg");
+msg.innerHTML = ``;
+
+
+
 
 // Create a br element for break
 let br = document.createElement("br");
@@ -193,6 +201,8 @@ const root = document.getElementById("root");
 div.appendChild(h2);
 div.appendChild(input);
 div.appendChild(br);
+div.appendChild(msg);
+div.appendChild(br2);
 div.appendChild(nav);
 div.appendChild(tabContent);
 hometab.appendChild(prashant_class);
@@ -214,6 +224,7 @@ let liNext = document.createElement("button");
 liNext.classList = "next";
 liNext.textContent = "Next";
 liNext.style.color = "white";
+liNext.style.display = "none";
 
 // Append the li elements to the ul element
 ul.appendChild(liPrev);
@@ -240,7 +251,7 @@ searchbar.addEventListener("keyup", function Keyup() {
     // Get the value of the searchbar element
     var searchText = searchbar.value;
     // console.log(searchText);
-    // fetchSearch();
+    getAllPosts(searchText);
     // Get all the elements with class col-md-auto
     let cols = document.getElementsByClassName("col-md-auto");
   
@@ -267,18 +278,16 @@ let offset = 10;
 var data_fetch;
 
 
-
 const movie_page_arr = []
 const fav_list = []
-async function getAllPosts(){
-    var serchItemval = document.getElementById('searchbar').value;
- 
+async function getAllPosts(searchText){
     // If the serchItemval field is empty
-    let resp = await fetch(`https://gateway.marvel.com:443/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}&limit=${limit}&offset=${offset}`);
+    let resp = await fetch(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${searchText}&apikey=${publicKey}&hash=${hash}&ts=${ts}&limit=${limit}&offset=${offset}`);
     console.log("limit :", limit);
     console.log("offset :", offset);
     console.log("page :", page);
     data_fetch = await resp.json();
+    console.log(data_fetch);
     let data = data_fetch.data.results;
 
 
@@ -303,7 +312,7 @@ async function getAllPosts(){
         const delBtn = document.createElement('p');
        
         const li = document.createElement('li');
-        li.innerHTML = serchItemval;
+        li.innerHTML = searchText;
 
         delBtn.addEventListener("click", () => {
             prashantContainer.removeChild(prashant_post);
@@ -342,6 +351,7 @@ async function getAllPosts(){
         prashant_post.appendChild(body);
         prashant_post.appendChild(fav_btn);
         prashant_post.appendChild(delBtn);
+        next.style.display = "block";
       
         // prashant_post.appendChild(prasRow)
         prashantContainer.appendChild(prashant_post);
@@ -356,21 +366,51 @@ async function getAllPosts(){
             localStorage.setItem("id", data[i].id);
             // fav_list.push(data[i].id)
             // fav_btn.innerHTML = `&hearts;`;
+            msg.innerHTML = ``;
             
             let num = data[i].id;
             
             if (fav_list.indexOf(num) !== -1) {
                 fav_list.splice(fav_list.indexOf(num), 1);
                 fav_btn.innerHTML = `♡`;
+                msg.innerHTML = `<div class="alert alert-danger  fade show" role="alert">
+                    ${data[i].name} ia Removed From Favourites List
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>`
                 prashantContainer.appendChild(prashant_post).num;
             } else {
                 fav_list.push(num);
+                msg.innerHTML = `<div class="alert alert-success  fade show" role="alert">
+                    ${data[i].name} ia Added To Favourites List
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>`
                 fav_btn.innerHTML = `&hearts;`;
                 favContainer.appendChild(prashant_post).num;
             }
         });
 
-        title.addEventListener("click", function() {
+        // title.addEventListener("click", function() {
+        //     console.log(data[i].id, "movie pageclicked");
+        //     let num = data[i];
+        //     if (movie_page_arr.indexOf(num) !== -1) {
+        //         movie_page_arr.splice(movie_page_arr.indexOf(num), 1);
+        //         moviePage.appendChild(prashant_post).num;
+        //     } else {
+        //         document.getElementById("movie_link").click();
+        //         let resp_thumb = num.thumbnail;
+        //         let resp_poster = String(resp_thumb.path + "." + resp_thumb.extension);
+        //         document.getElementById("poster").src = resp_poster;
+        //         document.getElementById("movietitle").innerHTML = num.name;
+        //         document.getElementById("moviedesc").innerHTML = num.description;
+        //     }
+
+        // });
+      
+        prashant_post.addEventListener("click", function() {
             console.log(data[i].id, "movie pageclicked");
             let num = data[i];
             if (movie_page_arr.indexOf(num) !== -1) {
@@ -392,7 +432,7 @@ async function getAllPosts(){
 
 }
 
-getAllPosts();
+// getAllPosts();
 
 
 // Select the previous and next buttons by their class names using querySelector
