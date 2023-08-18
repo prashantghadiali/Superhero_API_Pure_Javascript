@@ -133,7 +133,7 @@ prashant_class.setAttribute("class", "prashant_class row");
 // Create a div element with class and style attributes
 let card = document.createElement("div");
 card.setAttribute("class", "card text-center");
-card.setAttribute("style", "margin-top: 2vh; width: 100%; height: auto; border: none;");
+card.setAttribute("style", "margin-top: 2vh; width: 100%; height: auto; border: none; background: transparent;");
 
 // Create an img element with src, id, class and alt attributes
 let initial_image = document.createElement("img");
@@ -338,7 +338,8 @@ async function getAllPosts(searchText){
         if(data[i].description == ''){
             body.innerHTML = "No Description"
         };
-        fav_btn.innerHTML = `♡`;
+        // fav_btn.innerHTML = `♡`;
+        fav_btn.innerHTML = `<i class="far fa-heart"></i>`;
         delBtn.innerHTML = "X";
 
 
@@ -353,7 +354,7 @@ async function getAllPosts(searchText){
         prashantContainer.appendChild(prashant_post);
 
 
-        fav_btn.addEventListener("click", function() {
+        fav_btn.addEventListener("click", function(event) {
             console.log(data[i].id, "clicked for favourite");
             var nofavcheck = document.getElementById("nofav");
             if (nofavcheck) {
@@ -367,7 +368,6 @@ async function getAllPosts(searchText){
             
             if (fav_list.indexOf(num) !== -1) {
                 fav_list.splice(fav_list.indexOf(num), 1);
-                fav_btn.innerHTML = `♡`;
                   // create an alert element
                   var alert = document.createElement("div");
                   // set the class attribute
@@ -404,6 +404,7 @@ async function getAllPosts(searchText){
                   msg.appendChild(alert);
 
                 prashantContainer.appendChild(prashant_post).num;
+                event.stopPropagation();
             } else {
                 fav_list.push(num);
                   // create an alert element
@@ -413,7 +414,7 @@ async function getAllPosts(searchText){
                   // set the role attribute
                   alert.setAttribute("role", "alert");
                   // create a text node with the name
-                  var text = document.createTextNode(data[i].name + " is Removed From Favourites List");
+                  var text = document.createTextNode(data[i].name + " is Added in Favourites List");
                   // append the text node to the alert
                   alert.appendChild(text);
                   // create a button element
@@ -440,8 +441,10 @@ async function getAllPosts(searchText){
                   alert.appendChild(button);
 
                   msg.appendChild(alert);
-                fav_btn.innerHTML = `&hearts;`;
+                // fav_btn.innerHTML = `&hearts;`;
+                fav_btn.innerHTML = `<i class="fas fa-heart"></i>`;
                 favContainer.appendChild(prashant_post).num;
+                event.stopPropagation();
             }
         });
   
@@ -465,6 +468,8 @@ async function getAllPosts(searchText){
         }
 
 }
+
+
 
 // getAllPosts();   //if it is not use by search we should call func here.
 

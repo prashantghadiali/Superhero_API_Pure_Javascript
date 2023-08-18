@@ -1,5 +1,5 @@
 *, body {
-    background: #38393b;
+    background-color: #38393b;
     padding: 0;
     margin: 0;
 }
@@ -14,6 +14,12 @@
 
 .carousel-indicators{
     background: transparent;
+}
+
+#poster{
+    background: transparent;
+    margin: auto;
+    width: 50%;
 }
 
 
