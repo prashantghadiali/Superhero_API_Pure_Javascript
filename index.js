@@ -133,7 +133,7 @@ prashant_class.setAttribute("class", "prashant_class row");
 // Create a div element with class and style attributes
 let card = document.createElement("div");
 card.setAttribute("class", "card text-center");
-card.setAttribute("style", "margin-top: 2vh; width: 100%; height: auto;");
+card.setAttribute("style", "margin-top: 2vh; width: 100%; height: auto; border: none;");
 
 // Create an img element with src, id, class and alt attributes
 let initial_image = document.createElement("img");
@@ -236,7 +236,7 @@ hometab.appendChild(ul);
 root.appendChild(div);
 
 
-// index.html ends here
+// index.html genration part ends here
 
 
 let dateVal = new Date();
@@ -331,16 +331,13 @@ async function getAllPosts(searchText){
         delBtn.classList.add('delBtn');
 
         // add the content for each created element
-        // title.innerHTML = data[i].title;
         title.innerHTML = data[i].name;
         title.style.textOverflow = "ellipsis"
         title.style.overflow ="hidden";
-        // body.innerHTML = data[i].body;
         body.innerHTML = data[i].description;
         if(data[i].description == ''){
             body.innerHTML = "No Description"
         };
-        // fav_btn.innerHTML = `&hearts;`;
         fav_btn.innerHTML = `♡`;
         delBtn.innerHTML = "X";
 
@@ -353,19 +350,17 @@ async function getAllPosts(searchText){
         prashant_post.appendChild(delBtn);
         next.style.display = "block";
       
-        // prashant_post.appendChild(prasRow)
         prashantContainer.appendChild(prashant_post);
 
 
         fav_btn.addEventListener("click", function() {
-            console.log(data[i].id, "clicked");
+            console.log(data[i].id, "clicked for favourite");
             var nofavcheck = document.getElementById("nofav");
             if (nofavcheck) {
                 nofavcheck.remove();
             }
             localStorage.setItem("id", data[i].id);
-            // fav_list.push(data[i].id)
-            // fav_btn.innerHTML = `&hearts;`;
+            // clear msg if it is there.
             msg.innerHTML = ``;
             
             let num = data[i].id;
@@ -373,43 +368,83 @@ async function getAllPosts(searchText){
             if (fav_list.indexOf(num) !== -1) {
                 fav_list.splice(fav_list.indexOf(num), 1);
                 fav_btn.innerHTML = `♡`;
-                msg.innerHTML = `<div class="alert alert-danger  fade show" role="alert">
-                    ${data[i].name} ia Removed From Favourites List
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>`
+                  // create an alert element
+                  var alert = document.createElement("div");
+                  // set the class attribute
+                  alert.setAttribute("class", "alert alert-danger fade show");
+                  // set the role attribute
+                  alert.setAttribute("role", "alert");
+                  // create a text node with the name
+                  var text = document.createTextNode(data[i].name + " is Removed From Favourites List");
+                  // append the text node to the alert
+                  alert.appendChild(text);
+                  // create a button element
+                  var button = document.createElement("button");
+                  // set the type attribute
+                  button.setAttribute("type", "button");
+                  // set the class attribute
+                  button.setAttribute("class", "close");
+                  // set the data-dismiss attribute
+                  button.setAttribute("data-dismiss", "alert");
+                  // set the aria-label attribute
+                  button.setAttribute("aria-label", "Close");
+                  // create a span element
+                  var span = document.createElement("span");
+                  // set the aria-hidden attribute
+                  span.setAttribute("aria-hidden", "true");
+                  // create a text node with the times symbol
+                  var symbol = document.createTextNode("\u00D7");
+                  // append the symbol to the span
+                  span.appendChild(symbol);
+                  // append the span to the button
+                  button.appendChild(span);
+                  // append the button to the alert
+                  alert.appendChild(button);
+
+                  msg.appendChild(alert);
+
                 prashantContainer.appendChild(prashant_post).num;
             } else {
                 fav_list.push(num);
-                msg.innerHTML = `<div class="alert alert-success  fade show" role="alert">
-                    ${data[i].name} ia Added To Favourites List
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>`
+                  // create an alert element
+                  var alert = document.createElement("div");
+                  // set the class attribute
+                  alert.setAttribute("class", "alert alert-success fade show");
+                  // set the role attribute
+                  alert.setAttribute("role", "alert");
+                  // create a text node with the name
+                  var text = document.createTextNode(data[i].name + " is Removed From Favourites List");
+                  // append the text node to the alert
+                  alert.appendChild(text);
+                  // create a button element
+                  var button = document.createElement("button");
+                  // set the type attribute
+                  button.setAttribute("type", "button");
+                  // set the class attribute
+                  button.setAttribute("class", "close");
+                  // set the data-dismiss attribute
+                  button.setAttribute("data-dismiss", "alert");
+                  // set the aria-label attribute
+                  button.setAttribute("aria-label", "Close");
+                  // create a span element
+                  var span = document.createElement("span");
+                  // set the aria-hidden attribute
+                  span.setAttribute("aria-hidden", "true");
+                  // create a text node with the times symbol
+                  var symbol = document.createTextNode("\u00D7");
+                  // append the symbol to the span
+                  span.appendChild(symbol);
+                  // append the span to the button
+                  button.appendChild(span);
+                  // append the button to the alert
+                  alert.appendChild(button);
+
+                  msg.appendChild(alert);
                 fav_btn.innerHTML = `&hearts;`;
                 favContainer.appendChild(prashant_post).num;
             }
         });
-
-        // title.addEventListener("click", function() {
-        //     console.log(data[i].id, "movie pageclicked");
-        //     let num = data[i];
-        //     if (movie_page_arr.indexOf(num) !== -1) {
-        //         movie_page_arr.splice(movie_page_arr.indexOf(num), 1);
-        //         moviePage.appendChild(prashant_post).num;
-        //     } else {
-        //         document.getElementById("movie_link").click();
-        //         let resp_thumb = num.thumbnail;
-        //         let resp_poster = String(resp_thumb.path + "." + resp_thumb.extension);
-        //         document.getElementById("poster").src = resp_poster;
-        //         document.getElementById("movietitle").innerHTML = num.name;
-        //         document.getElementById("moviedesc").innerHTML = num.description;
-        //     }
-
-        // });
-      
+  
         prashant_post.addEventListener("click", function() {
             console.log(data[i].id, "movie pageclicked");
             let num = data[i];
@@ -428,11 +463,10 @@ async function getAllPosts(searchText){
         });
 
         }
-        // console.log("fav list :",fav_list);
 
 }
 
-// getAllPosts();
+// getAllPosts();   //if it is not use by search we should call func here.
 
 
 // Select the previous and next buttons by their class names using querySelector
