@@ -1,12 +1,8 @@
-*, body {
-    background-color: #38393b;
+body {
     padding: 0;
     margin: 0;
 }
 
-.header{
-    background: #F0F3FA;
-}
 
 .prashant_class{
     margin-right: 3% !important;

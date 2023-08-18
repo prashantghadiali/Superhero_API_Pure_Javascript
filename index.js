@@ -5,7 +5,6 @@ div.setAttribute("class", "container");
 
 // Create a h2 element with text content Superhero Hunter...The Heading
 let h2 = document.createElement("h2");
-h2.style.color = "white";
 h2.textContent = "Superhero Hunter";
 
 // Create an input element for searchbar with type, id, class and placeholder attributes
@@ -13,7 +12,7 @@ let input = document.createElement("input");
 input.setAttribute("type", "search");
 input.setAttribute("id", "searchbar");
 input.setAttribute("class", "form-control nav-link");
-input.setAttribute("placeholder", "Search");
+input.setAttribute("placeholder", "Search your Superhero...");
 
 let msg = document.createElement("div");
 msg.setAttribute("id", "msg");
@@ -151,14 +150,12 @@ let cardtitile = document.createElement("h5");
 cardtitile.setAttribute("class", "card-title");
 cardtitile.setAttribute("id", "movietitle");
 cardtitile.innerHTML = "No Title to Show";
-cardtitile.style.color = "white";
 
 // Create a p element with class and id attributes
 let p = document.createElement("p");
 p.setAttribute("class", "card-text");
 p.setAttribute("id", "moviedesc");
 p.innerHTML = "No Description to Show";
-p.style.color = "#cfdbe9";
 
 // Create an a element with href, class and text content
 let a = document.createElement("a");
@@ -339,7 +336,7 @@ async function getAllPosts(searchText){
             body.innerHTML = "No Description"
         };
         // fav_btn.innerHTML = `♡`;
-        fav_btn.innerHTML = `<i class="far fa-heart"></i>`;
+        fav_btn.innerHTML = `<i class="far fa-heart fa-lg"></i>`;
         delBtn.innerHTML = "X";
 
 
@@ -442,7 +439,7 @@ async function getAllPosts(searchText){
 
                   msg.appendChild(alert);
                 // fav_btn.innerHTML = `&hearts;`;
-                fav_btn.innerHTML = `<i class="fas fa-heart"></i>`;
+                fav_btn.innerHTML = `<i class="fas fa-heart fa-lg"></i>`;
                 favContainer.appendChild(prashant_post).num;
                 event.stopPropagation();
             }
@@ -529,8 +526,7 @@ next.addEventListener("click", function() {
   if (offset + limit >= data_fetch.data.total) {
     next.style.display = "none";
   }
-  // Remove limit number child elements using querySelectorAll and removeChild
-  
+
   // Show the previous button if it was hidden before using style.display
   prev.style.display = "block";
 });
